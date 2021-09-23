@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using XPTO_API.Data;
+using XPTO_API.Models;
 
 namespace XPTO_API.Controllers
 {
@@ -11,38 +13,86 @@ namespace XPTO_API.Controllers
     [ApiController]
     public class FornecedorController : ControllerBase
     {
-        public FornecedorController()
-        {
+        public IRepository _repo { get; }
 
+        public FornecedorController(IRepository repo)
+        {
+            _repo = repo;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok();
+           try 
+	        {	        
+		        return Ok();
+	        }
+	        catch (Exception)
+	        {
+
+		        return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco de Dados Falhou");
+	        }
         }
         [HttpGet("{FornecedorId}")]
         public IActionResult Get(int ProdutoId)
         {
-            return Ok();
+           try 
+	        {	        
+		        return Ok();
+	        }
+	        catch (Exception)
+	        {
+
+		        return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco de Dados Falhou");
+	        }
         }
 
         [HttpPost]
-        public IActionResult Post()
+        public async Task<IActionResult> Post(Fornecedor model)
         {
-            return Ok();
+            try
+            {
+                _repo.Add(model);
+                if (await _repo.SaveChangesAsync())
+                {
+                    return Created($"/api/fornecedor/{model.Id}", model);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco de Dados Falhou");
+            }
+            return BadRequest();
         }
 
         [HttpPut("{FornecedorId}")]
         public IActionResult Put(int FornecedorId)
         {
-            return Ok();
+           try 
+	        {	        
+		        return Ok();
+	        }
+	        catch (Exception)
+	        {
+
+		        return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco de Dados Falhou");
+	        }
         }
 
         [HttpDelete("{FornecedorId}")]
         public IActionResult Delete(int FornecedorId)
         {
-            return Ok();
+           try 
+	        {	        
+		        return Ok();
+	        }
+	        catch (Exception)
+	        {
+
+		        return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco de Dados Falhou");
+	        }
         }
     }
 }

@@ -37,6 +37,8 @@ namespace XPTO_API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "XPTO_API", Version = "v1" });
             });
+
+            services.AddScoped<IRepository, Repository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
