@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!loading">
     <Titulo :texto="`Produto: ${produto.nome}`" :btnVoltar="true"> /> </Titulo>
     <img
       src="https://img.icons8.com/nolan/64/edit--v1.png"
@@ -64,11 +64,11 @@
           <td class="colPequeno">Fornecedor:</td>
           <td class="lblProduto">
             <label v-if="visualizando">{{ produto.fornecedor.nome }}</label>
-            <select v-else v-model="produto.fornecedor">
+            <select v-else v-model="produto.fornecedor.id">
               <option
                 v-for="(fornecedor, index) in fornecedores"
                 :key="index"
-                v-bind:value="fornecedor"
+                v-bind:value="fornecedor.id"
               >
                 {{ fornecedor.nome }}
               </option>
@@ -92,37 +92,50 @@ export default {
       produto: {},
       visualizando: true,
       id: this.$route.params.id,
+      loading: true,
     };
   },
   created() {
-    this.$http
-      .get("http://localhost:3000/produtos/" + this.id)
-      .then((res) => res.json())
-      .then((produto) => (this.produto = produto));
-
-    this.$http
-      .get("http://localhost:3000/fornecedores")
-      .then((res) => res.json())
-      .then((fornecedor) => (this.fornecedores = fornecedor));
+    this.carregaFornecedor();
   },
   methods: {
+    carregarFornecedor() {
+      this.$http
+        .get("http://localhost:5000/api/fornecedor")
+        .then((res) => res.json())
+        .then(fornecedor => {
+          this.fornecedores = fornecedor;
+          this.carregarProduto();
+          
+          });
+    },
+    carregarProduto() {
+      this.$http
+        .get("http://localhost:5000/api/produto/" + this.id)
+        .then((res) => res.json())
+        .then(produto => {
+          this.produto = produto;
+          this.loading=false;
+          });
+    },
     editar() {
       this.visualizando = !this.visualizando;
     },
 
-    salvar(_produto) {
+    salvar(produto) {
       let _produtoEditar = {
-        id: _produto.id,
-        nome: _produto.nome,
-        preco: _produto.preco,
-        codBarra: _produto.codBarra,
-        img: _produto.img,
-        fornecedor: _produto.fornecedor,
-      };
-      this.$http.put(
-        `http://localhost:3000/produtos/${_produtoEditar.id}`,
-        _produtoEditar
-      );
+        id: produto.id,
+        nome: produto.nome,
+        preco: produto.preco,
+        codBarra: produto.codBarra,
+        img: produto.img,
+        fornecedorid: produto.fornecedor.id
+      }
+      this.$http
+        .put(`http://localhost:5000/api/produto/${_produtoEditar.id}`,_produtoEditar)
+        .then(res => res.json())
+        .then(produto = this.produto = produto)
+
       this.visualizando = !this.visualizando;
     },
     cancelar() {

@@ -31,6 +31,7 @@ namespace XPTO_API
             services.AddDbContext<DataContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("BdXpto"))
             );
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -38,6 +39,8 @@ namespace XPTO_API
             });
 
             services.AddScoped<IRepository, Repository>();
+
+            services.AddCors();
  
         }
 
@@ -50,7 +53,7 @@ namespace XPTO_API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "XPTO_API v1"));
             }
-
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -61,6 +64,9 @@ namespace XPTO_API
             {
                 endpoints.MapControllers();
             });
+
+
+
         }
     }
 }

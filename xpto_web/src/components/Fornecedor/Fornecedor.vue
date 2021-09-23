@@ -34,13 +34,20 @@
           </td>
         </tr>
       </tbody>
-      <t-foot v-else>Nenhum produto encontrado</t-foot>
+      <t-foot v-else>
+        <tr>
+          <td>
+            <h5>Nenhum produto encontrado</h5>
+          </td>
+        </tr>
+      </t-foot>
     </table>
   </div>
 </template>
 
 <script>
 import Titulo from "../_share/Titulo.vue";
+
 export default {
   components: {
     Titulo,
@@ -53,7 +60,7 @@ export default {
   },
   created() {
     this.$http
-      .get("http://localhost:3000/produtos")
+      .get("http://localhost:5000/api/produto")
       .then((res) => res.json())
       .then((produtos) => {
         this.Produtos = produtos;
@@ -76,7 +83,7 @@ export default {
     },
     carregarfornecedores() {
       this.$http
-        .get("http://localhost:3000/fornecedores")
+        .get("http://localhost:5000/api/fornecedor")
         .then((res) => res.json())
         .then((fornecedor) => {
           this.fornecedores = fornecedor;

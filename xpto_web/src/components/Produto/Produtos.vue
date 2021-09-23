@@ -74,7 +74,13 @@
           </td>
         </tr>
       </tbody>
-      <t-foot v-else>Nenhum produto encontrado</t-foot>
+      <t-foot v-else>
+        <tr>
+          <td>
+            <h5>Nenhum produto encontrado</h5>
+          </td>
+        </tr>
+      </t-foot>
     </table>
   </div>
 </template>
@@ -102,14 +108,12 @@ export default {
     if (this.fornecedorId) {
       this.carregarFornecedores();
       this.$http
-        .get(
-          "http://localhost:3000/produtos?fornecedor.id=" + this.fornecedorId
-        )
+        .get(`http://localhost:5000/api/produto/ByFornecedor/${this.fornecedorId}`)
         .then((res) => res.json())
         .then((produtos) => (this.produtos = produtos));
     } else {
       this.$http
-        .get("http://localhost:3000/produtos")
+        .get("http://localhost:5000/api/produto")
         .then((res) => res.json())
         .then((produtos) => (this.produtos = produtos));
     }
@@ -128,7 +132,7 @@ export default {
         },
       };
       this.$http
-        .post("http://localhost:3000/produtos", _produto)
+        .post("http://localhost:5000/api/produto", _produto)
         .then((res) => res.json())
         .then((produto) => {
           this.produtos.push(produto);
@@ -140,7 +144,7 @@ export default {
     },
     remover(produto) {
       this.$http
-        .delete(`http://localhost:3000/produtos/${produto.id}`)
+        .delete(`http://localhost:5000/api/produto/${produto.id}`)
         .then(() => {
           let indice = this.produtos.indexOf(produto);
           this.produtos.splice(indice, 1);
@@ -148,7 +152,7 @@ export default {
     },
     carregarFornecedores() {
       this.$http
-        .get("http://localhost:3000/fornecedores/" + this.fornecedorId)
+        .get("http://localhost:5000/api/fornecedor/" + this.fornecedorId)
         .then((res) => res.json())
         .then((fornecedor) => {
           this.fornecedor = fornecedor;
