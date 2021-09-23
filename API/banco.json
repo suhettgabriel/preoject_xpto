@@ -1,0 +1,74 @@
+{
+  "fornecedores": [
+    {
+      "id": 1,
+      "nome": "Selita"
+    },
+    {
+      "id": 2,
+      "nome": "Tio João"
+    },
+    {
+      "id": 3,
+      "nome": "Amália"
+    },
+    {
+      "id": 4,
+      "nome": "Piracanjuba"
+    },
+    {
+      "id": 4,
+      "nome": "Glória"
+    },
+    {
+      "id": 5,
+      "nome": "Nestle"
+    }
+  ],
+  "produtos": [
+    {
+      "nome": "Arroz Integral 1,5 kg",
+      "preco": "12,25",
+      "codBarra": "12131 1323586 5465465 7899856321",
+      "img": "./Imagens/arrozIntegral.png",
+      "id": 1,
+      "fornecedor": {
+        "id": 3,
+        "nome": "Amália"
+      }
+    },
+    {
+      "nome": "Feijão Fradinho",
+      "preco": "6.99",
+      "codBarra": "121315599 985454 6545647 654545321",
+      "img": "",
+      "id": 2,
+      "fornecedor": {
+        "id": 2,
+        "nome": "Tio João"
+      }
+    },
+    {
+      "id": 3,
+      "nome": "Macarrão Spagetti 500gr",
+      "preco": "3.25",
+      "codBarra": "1213254 45666 565654546",
+      "img": "",
+      "fornecedor": {
+        "id": 1,
+        "nome": "Selita"
+      }
+    },
+    {
+      "nome": "Canjiquinha Moida 1 kg",
+      "preco": "1.20",
+      "codBarra": "123135654 454 564 56 456 4564564564531",
+      "img": "",
+      "fornecedor": {
+        "id": 2,
+        "nome": "Tio João"
+      },
+      "id": 5
+    }
+  ]
+}
