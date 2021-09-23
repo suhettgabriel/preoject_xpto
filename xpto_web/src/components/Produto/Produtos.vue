@@ -74,13 +74,13 @@
           </td>
         </tr>
       </tbody>
-      <t-foot v-else>
+      <tfoot v-else>
         <tr>
           <td>
             <h5>Nenhum produto encontrado</h5>
           </td>
         </tr>
-      </t-foot>
+      </tfoot>
     </table>
   </div>
 </template>
