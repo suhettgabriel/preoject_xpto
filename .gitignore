@@ -21,3 +21,7 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Arquivos Dotnet core e ef core
+bin
+obj

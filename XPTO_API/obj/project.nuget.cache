@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uOfsSmVQXp0fxD74us8h6S7MEpIpxBlSk/D8jH9IzJkt28agdzmkVneZhHFJzlQ/jrja3kKN19ElNrANyHKzmQ==",
+  "dgSpecHash": "44A6XpIX2++syLv8k1Q9eOYBcAM7sFj2dQvaV8DrjVtP29jmjNpdIXJieAQr09LHMEggvny61d/aT8HK6dUNZw==",
   "success": true,
-  "projectFilePath": "C:\\Projetos\\XPTO\\XPTO_API\\XPTO_API.csproj",
+  "projectFilePath": "C:\\Users\\gabriel.suhett\\source\\repos\\XPTOProject\\XPTO_API\\XPTO_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gabriel.suhett\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\gabriel.suhett\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",
