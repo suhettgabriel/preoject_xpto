@@ -31,7 +31,6 @@ namespace XPTO_API
             services.AddDbContext<DataContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("BdXpto"))
             );
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -39,6 +38,7 @@ namespace XPTO_API
             });
 
             services.AddScoped<IRepository, Repository>();
+ 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

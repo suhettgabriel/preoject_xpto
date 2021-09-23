@@ -91,7 +91,7 @@ namespace XPTO_API.Data
             }
             query = query
                     .AsNoTracking()
-                    .OrderBy(a => a.Id)
+                    .OrderBy(a => a.Id);
             return await query.ToArrayAsync();
         }
 

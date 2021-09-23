@@ -21,11 +21,12 @@ namespace XPTO_API.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
            try 
-	        {	        
-		        return Ok();
+	        {
+                var results = await _repo.GetAllFornecedoresAsync(true);        
+		        return Ok(results);
 	        }
 	        catch (Exception)
 	        {
@@ -34,11 +35,12 @@ namespace XPTO_API.Controllers
 	        }
         }
         [HttpGet("{FornecedorId}")]
-        public IActionResult Get(int ProdutoId)
+        public async Task<IActionResult> Get(int ProdutoId)
         {
            try 
-	        {	        
-		        return Ok();
+	        {
+                var results = await _repo.GetFornecedorAsyncById(ProdutoId, true);
+                return Ok(results);
 	        }
 	        catch (Exception)
 	        {
@@ -68,31 +70,49 @@ namespace XPTO_API.Controllers
         }
 
         [HttpPut("{FornecedorId}")]
-        public IActionResult Put(int FornecedorId)
+        public async Task<IActionResult> Put(int FornecedorId, Fornecedor model)
         {
            try 
-	        {	        
-		        return Ok();
+	        {
+                var Fornecedor = await _repo.GetFornecedorAsyncById(FornecedorId, false);
+                if (Fornecedor == null) return NotFound();
+
+                _repo.Update(model);
+                if(await _repo.SaveChangesAsync())
+                {
+                    return Ok();
+                }
+
 	        }
 	        catch (Exception)
 	        {
 
 		        return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco de Dados Falhou");
 	        }
+            return BadRequest();
         }
 
         [HttpDelete("{FornecedorId}")]
-        public IActionResult Delete(int FornecedorId)
+        public async Task<IActionResult> Delete(int FornecedorId)
         {
            try 
-	        {	        
-		        return Ok();
-	        }
+	        {
+                var Fornecedor = await _repo.GetFornecedorAsyncById(FornecedorId, false);
+                if (Fornecedor == null) return NotFound();
+
+                _repo.Delete(Fornecedor);
+
+                if (await _repo.SaveChangesAsync())
+                {
+                    return Ok();
+                }
+            }
 	        catch (Exception)
 	        {
 
 		        return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco de Dados Falhou");
 	        }
+            return BadRequest();
         }
     }
 }
